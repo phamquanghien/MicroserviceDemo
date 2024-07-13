@@ -1,8 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 namespace EmployeeService.Controllers
 {
-
-    using Microsoft.AspNetCore.Mvc;
-
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase

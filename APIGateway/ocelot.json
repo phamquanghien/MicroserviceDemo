@@ -1,0 +1,32 @@
+{
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/employee",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5186
+          }
+        ],
+        "UpstreamPathTemplate": "/employee",
+        "UpstreamHttpMethod": [ "GET" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/MemberUnit",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5197
+          }
+        ],
+        "UpstreamPathTemplate": "/MemberUnit",
+        "UpstreamHttpMethod": [ "GET" ]
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "http://localhost:5100"
+    }
+}
+  

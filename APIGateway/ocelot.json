@@ -9,7 +9,7 @@
             "Port": 5125
           }
         ],
-        "UpstreamPathTemplate": "/account/login",
+        "UpstreamPathTemplate": "/api/account/login",
         "UpstreamHttpMethod": [ "POST" ]
       },
       {
@@ -21,8 +21,56 @@
             "Port": 5125
           }
         ],
-        "UpstreamPathTemplate": "/account/{everything}",
+        "UpstreamPathTemplate": "/api/account/{everything}",
         "UpstreamHttpMethod": [ "GET", "POST" ],
+        "AuthenticationOptions": {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": []
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/role/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5125
+          }
+        ],
+        "UpstreamPathTemplate": "/api/role/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "AuthenticationOptions": {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": []
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/RolePermission/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5125
+          }
+        ],
+        "UpstreamPathTemplate": "/api/RolePermission/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "AuthenticationOptions": {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": []
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/UserRole/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5125
+          }
+        ],
+        "UpstreamPathTemplate": "/api/UserRole/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
         "AuthenticationOptions": {
           "AuthenticationProviderKey": "Bearer",
           "AllowedScopes": []
@@ -37,7 +85,7 @@
             "Port": 5186
           }
         ],
-        "UpstreamPathTemplate": "/employee/{everything}",
+        "UpstreamPathTemplate": "/api/employee/{everything}",
         "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
         "AuthenticationOptions": {
           "AuthenticationProviderKey": "Bearer",

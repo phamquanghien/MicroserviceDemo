@@ -4,7 +4,7 @@
     {
         EmployeeView, EmployeeCreate, EmployeeEdit, EmployeeDelete,
         MemberUnitView, MemberUnitCreate, MemberUnitEdit, MemberUnitDelete,
-        RoleView, RoleCreate, RoleEdit, RoleDelete, AssignClaim,
-        AccountView, AssignRole, AddClaim, DeleteClaim
+        RoleView, RoleViewById, RoleCreate, RoleEdit, RoleDelete, AssignPermissionToRole, GetPermissionForRole,
+        ViewAllUser, GetRoleForUser, AssignRoleToUser
     }
 }

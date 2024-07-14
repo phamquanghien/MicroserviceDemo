@@ -119,7 +119,7 @@ namespace UserService.Controllers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var token = new JwtSecurityToken(
             issuer: _configuration["Jwt:Issuer"], audience: _configuration["Jwt:Audience"], claims: claims,
-            expires: DateTime.Now.AddSeconds(20), signingCredentials: creds);
+            expires: DateTime.Now.AddMinutes(10), signingCredentials: creds);
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
         [HttpPost("refresh-token")]

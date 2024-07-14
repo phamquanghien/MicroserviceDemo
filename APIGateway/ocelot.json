@@ -1,7 +1,35 @@
 {
     "Routes": [
       {
-        "DownstreamPathTemplate": "/api/employee",
+        "DownstreamPathTemplate": "/api/account/login",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5125
+          }
+        ],
+        "UpstreamPathTemplate": "/account/login",
+        "UpstreamHttpMethod": [ "POST" ]
+      },
+      {
+        "DownstreamPathTemplate": "/api/account/{everything}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5125
+          }
+        ],
+        "UpstreamPathTemplate": "/account/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST" ],
+        "AuthenticationOptions": {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": []
+        }
+      },
+      {
+        "DownstreamPathTemplate": "/api/employee/{everything}",
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [
           {
@@ -9,8 +37,12 @@
             "Port": 5186
           }
         ],
-        "UpstreamPathTemplate": "/employee",
-        "UpstreamHttpMethod": [ "GET" ]
+        "UpstreamPathTemplate": "/employee/{everything}",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+        "AuthenticationOptions": {
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": []
+        }
       },
       {
         "DownstreamPathTemplate": "/api/MemberUnit",

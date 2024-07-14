@@ -23,15 +23,13 @@ builder.Services.AddAuthentication(options =>
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Issuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                        .GetBytes(builder.Configuration["Jwt:Key"])),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
             ClockSkew = TimeSpan.Zero
         };
     });
 builder.Services.AddAuthorization(options =>
     {
-        foreach (var permission in Enum.GetValues(typeof(SystemPermissions))
-                                                .Cast<SystemPermissions>())
+        foreach (var permission in Enum.GetValues(typeof(SystemPermissions)).Cast<SystemPermissions>())
         {
             options.AddPolicy(permission.ToString(), policy =>
                 policy.RequireClaim("Permission", permission.ToString()));

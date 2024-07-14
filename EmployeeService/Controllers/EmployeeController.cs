@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EmployeeService.Data;
 using EmployeeService.Models;
+using Microsoft.AspNetCore.Authorization;
+using SharedLibrary;
 
 namespace EmployeeService.Controllers
 {
@@ -18,6 +20,7 @@ namespace EmployeeService.Controllers
 
         // GET: api/Employee
         [HttpGet]
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeView))]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
             return await _context.Employee.ToListAsync();
@@ -25,6 +28,7 @@ namespace EmployeeService.Controllers
 
         // GET: api/Employee/5
         [HttpGet("{id}")]
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeView))]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             var employee = await _context.Employee.FindAsync(id);
@@ -40,6 +44,7 @@ namespace EmployeeService.Controllers
         // PUT: api/Employee/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeEdit))]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
             if (id != employee.EmployeeId)
@@ -71,6 +76,7 @@ namespace EmployeeService.Controllers
         // POST: api/Employee
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeCreate))]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
             _context.Employee.Add(employee);
@@ -81,6 +87,7 @@ namespace EmployeeService.Controllers
 
         // DELETE: api/Employee/5
         [HttpDelete("{id}")]
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeDelete))]
         public async Task<IActionResult> DeleteEmployee(int id)
         {
             var employee = await _context.Employee.FindAsync(id);

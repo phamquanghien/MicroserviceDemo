@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DemoMVC.Data;
 using DemoMVC.Models;
+using Microsoft.AspNetCore.Authorization;
+using SharedLibrary;
 
 namespace DemoMVC.Controllers
 {
@@ -19,13 +16,13 @@ namespace DemoMVC.Controllers
             _context = context;
         }
 
-        // GET: Employee
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeView))]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Employee.ToListAsync());
         }
 
-        // GET: Employee/Details/5
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeView))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,15 +40,13 @@ namespace DemoMVC.Controllers
             return View(employee);
         }
 
-        // GET: Employee/Create
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeCreate))]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Employee/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeCreate))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployeeId,FirstName,LastName,Address,DateOfBirth,Position,Email,HireDate")] Employee employee)
@@ -65,7 +60,7 @@ namespace DemoMVC.Controllers
             return View(employee);
         }
 
-        // GET: Employee/Edit/5
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeEdit))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,9 +76,7 @@ namespace DemoMVC.Controllers
             return View(employee);
         }
 
-        // POST: Employee/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeEdit))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EmployeeId,FirstName,LastName,Address,DateOfBirth,Position,Email,HireDate")] Employee employee)
@@ -116,7 +109,7 @@ namespace DemoMVC.Controllers
             return View(employee);
         }
 
-        // GET: Employee/Delete/5
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeDelete))]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +127,7 @@ namespace DemoMVC.Controllers
             return View(employee);
         }
 
-        // POST: Employee/Delete/5
+        [Authorize(Policy = nameof(SystemPermissions.EmployeeDelete))]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

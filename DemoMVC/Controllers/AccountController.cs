@@ -61,7 +61,7 @@ namespace DemoMVC.Controllers
                 Response.Cookies.Append("AccessToken", token, cookieOptions);
                 Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Employee");
             }
 
             ModelState.AddModelError(string.Empty, "Invalid login attempt.");
